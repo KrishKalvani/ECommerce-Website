@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/cmsStyle.css" type="text/css" rel="stylesheet">
+    <title>CMS - CUSTOMER ORDERS</title>
+    <style>
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+    </style>
+   
+</head>
+<body>
+    <div id="CMSnav">
+        
+        <a style="color:white; float:left; margin-top :1.5%; margin-left: 2%; text-decoration: none; font-size: large; font-family: Arial, Helvetica, sans-serif; cursor: pointer;" onclick="searchBarCategories('TShirts')">CMS</a>
+        <a style="color:white; float:left; margin-top :1.5%; margin-left: 2%; text-decoration: none; font-size: large; font-family: Arial, Helvetica, sans-serif;" href="addProductsCMS.html">Add Product</a>
+        <a style="color:white; float:left; margin-top :1.5%; margin-left: 2%; text-decoration: none; font-size: large; font-family: Arial, Helvetica, sans-serif;" href="orderPage.html">Customer Orders</a> 
+        <a style="color:white; float:left; margin-top: 1.5%; margin-left: 1%; text-decoration: none; font-size: large; font-family: Arial, Helvetica, sans-serif; float:right; margin-right:2%;" href="../php/cmsLogin.php">Logout</a>
+        <h2 style="color:white; font-family:Arial, Helvetica, sans-serif; ">JustShirts Content Management System (CMS)</h2>
+    </div>
+    <form id="searchBarContainer" action="../php/searchProductsCMS.php" method="get"><input type="text" name="name" id="SearchBar" type="text" placeholder="Search.." required> <input type="submit" value="search">
+    </form>
+    <div class="dropdown"><!--menu-->
+        <button class="dropbtn">CATEGORIES</button>
+        <br><br>
+        <div style="margin-left: 5%;" class="dropdown-content"><!--menu content-->
+            <a style="cursor:pointer;" onclick="searchBarCategories('TShirts')">T-Shirts</a>
+            <a style="cursor:pointer;" onclick="searchBarCategories('Collared')">Collared</a>
+            <span style="cursor:pointer;"  onclick="searchBarCategories('Full-Sleeve')">Full-Sleeve</span>
+            <span style="cursor:pointer;" onclick="searchBarCategories('Sleeveless')">Sleeveless</span>
+            <span style="cursor:pointer;" onclick="searchBarCategories('Polo')">Polo</span>
+        </div>
+    </div>
+
+    <h2 style="text-align: center; font-family: Arial, Helvetica, sans-serif;">Customer orders</h2>
+    
+
+    <table style="width: 95%; margin-left:2%;">
+        <tr>
+            <td style="width:2%;">OrderID</td>
+            <td style="width:2%;">CustomerID</td>
+            <td>Customer name</td>
+            <td>Shipping Address</td>
+            <td style="width:3%;">Product ID</td>
+            <td>Product Name</td>
+            <td style="width:2%;">Price</td>
+            <td style="width:2%;">Quantity</td>
+            <td style="width:2%;">Total Cost</td>
+            <td>Shipping status</td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>1001</td>
+            <td>Krish Kal</td>
+            <td>Middlesex University</td>
+            <td>JS#1 <br>
+            JS#2</td>
+            <td>Hand Gripped <br>
+            Optical Illusion</td>
+            <td>50 <br>
+            70</td>
+            <td>1 <br>
+                1</td>
+            <td>120</td>
+           
+            <td>On its way <button style="margin-left:3%; font-size: medium; font-family: Arial, Helvetica, sans-serif;">Click here to cancel the order</button></td>
+        </tr>
+
+        <tr>
+            <td>102</td>
+            <td>1003</td>
+            <td>Ali Usman</td>
+            <td>Al Qusais bldg. 119</td>
+            <td>JS#9</td>
+            <td>Linen Paradise</td>
+            <td>30</td>
+            <td>1</td>
+            <td>30</td>
+           
+            <td>On its way <button style="margin-left:3%; font-size: medium; font-family: Arial, Helvetica, sans-serif;">Click here to cancel the order</button></td>
+        </tr>
+
+        <tr>
+            <td>103</td>
+            <td>1003</td>
+            <td>Milan V</td>
+            <td>Abu Hail Villa. 5</td>
+            <td>JS#22</td>
+            <td>Graphic Inked</td>
+            <td>70</td>
+            <td>2 </td>
+            <td>140</td>
+           
+            <td>On its way <button style="margin-left:3%; font-size: medium; font-family: Arial, Helvetica, sans-serif;">Click here to cancel the order</button></td>
+        </tr>
+    </table>
+
+    <script>
+        function searchBarCategories(category){
+            let form= document.getElementById("searchBarContainer")
+            form.elements["SearchBar"].value=category;
+            form.submit();
+        }
+    </script>
+
+
+
+
+
+    <div id="CMSfooterDiv">
+        <br>
+        <p id="CMSfooterText">Web Page made by Krish Kalvani & Ali Usman (1920x1080)</p>
+
+    </div>
+    
+</body>
+</html>
+    

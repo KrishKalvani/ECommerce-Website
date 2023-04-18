@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/styles.css" type="text/css" rel="stylesheet">
+    
+    <script src="../js/myInitFunction.js"></script> 
+    <script src="../js/ajaxLogin.js"></script>
+    <script src="../js/basket.js"></script>
+    
+
+    <title>JustShirts - Cart</title>
+</head>
+<body onload="loadBasket(); init();"><!--loadBasket function will start the added products functionality over here-->
+    <div id="navigation">
+        <a style="float:left; margin-top:-1.5%; margin-left:2%;" href="../pages/HomePage4.html"><img id="LogoSize" src="../imgs/logo4.png"></a>
+        
+        
+        <form id="searchBarContainer" action="../php/searchProducts.php" method="get"><input type="text" name="name" id="SearchBar" type="text" placeholder="Search.." required> <input id="SearchButton" type="submit" value="search">
+            <a href="cartPage.html" class="split"><img style="height:20%; width:20%;" src="../imgs/cartImg.png"></a><!--cart page link-->
+            <a style="font-size:small;" href="LoginPage.html" class="split">LOGIN</a><!--login page link-->
+            <a style="font-size:small;" href="RegisterPage.html" class="split">REGISTER</a><!--register page link-->
+            <a style="font-size:small;" href="../php/ProfileDetails.php" class="split">My Profile</a><!--profile page link-->
+            
+            <div id="ProfileBox"><!--profile username (changeable according to loggedInUser)-->
+                <p style="color:black; margin-top: 20px; font-family: Arial, Helvetica, sans-serif;">Hello  <span id="profile"></span>
+                    <button onclick='logout()'>Logout</button></p>
+            </div>
+            </form>
+        
+        
+
+    </div>
+    <div class="go left"><!--class to keep the left div for the categories and sizes-->
+        <div>
+                <br>
+                
+            
+                <div class="dropdown"><!--menu-->
+                    <button class="dropbtn">CATEGORIES</button>
+                    <br><br>
+                    <div class="dropdown-content"><!--menu content-->
+                        <a onclick="searchBarCategories('TShirts')">T-Shirts</a>
+                        <a onclick="searchBarCategories('Collared')">Collared</a>
+                        <a  onclick="searchBarCategories('Full-Sleeve')">Full-Sleeve</a>
+                        <a onclick="searchBarCategories('Sleeveless')">Sleeveless</a>
+                        <a  onclick="searchBarCategories('Polo')">Polo</a>
+                    </div>
+                </div>
+           
+           
+        </div>
+        
+        </div>
+       
+
+      
+            <h2>Basket</h2>
+            <div id="basketDiv"></div>
+           
+                
+            
+
+        
+
+
+        <div> 
+            <p class="CartFooter" style="color: white;">Web Page made by Krish Kalvani & Ali Usman (1920x1080)</p>
+        </div>
+        
+        <script>
+            function searchBarCategories(category){
+                let form= document.getElementById("searchBarContainer")
+                form.elements["SearchBar"].value=category;
+                form.submit();
+            }
+        </script>
+    
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="../js/myInitFunction.js"></script> 
+     <script src="../js/RegisterPage.js"></script> 
+    <script src="../js/ajaxLogin.js"></script>
+
+    <link href="../css/styles.css" type="text/css" rel="stylesheet"><!--link to CSS page-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <title>JustShirts - Home</title>
+    <style>
+        body{
+    background-image: url("../imgs/polo products/Stripped.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+        }
+        .container {
+  position: relative;
+  
+}
+
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40%;
+  right: 0;
+  height: 100%;
+  width: 10%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+    </style>
+</head>
+
+<body onload="init()"><!--init function for keeping the profile updated in this page and other pages too.-->
+    <div id="navigation"><!--nav bar div-->
+        
+        <a style="float:left; margin-top:-1%; margin-left:2%;" href="../pages/HomePage4.html "><img id="LogoSize"
+                src="../imgs/logo4.png"></a><!--making the logo into a home page link-->
+
+
+        
+        
+        <form id="searchBarContainer" action="../php/searchProducts.php" method="get"><input type="text" name="name" id="SearchBar" type="text" placeholder="Search.." required> <input id="SearchButton" type="submit" value="search" onclick="loadContent();">
+            <a href="cartPage.html" class="split"><img style="height:20%; width:20%;" src="../imgs/cartImg.png"></a><!--cart page link-->
+            <a style="font-size:small;" href="LoginPage.html" class="split">LOGIN</a><!--login page link-->
+            <a style="font-size:small;" href="RegisterPage.html" class="split">REGISTER</a><!--register page link-->
+            <a style="font-size:small;" href="../php/ProfileDetails.php" class="split">My Profile</a><!--profile page link-->
+            
+            <div id="ProfileBox"><!--profile username (changeable according to loggedInUser)-->
+                <p style="color:black; margin-top: 20px; font-family: Arial, Helvetica, sans-serif;">Hello user <span id="profile"></span>
+                <button onclick='logout()'>Logout</button></p>
+            </div>
+            </form>
+        
+        
+
+
+
+    </div>
+    
+
+    <h1 style="color: white; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;">Welcome to JustShirts.</h1>
+    <button style="margin-top:-0.9%; margin-left:-15%;" class="homeViewProductsButton" onclick="searchBarCategories('TShirts');">VIEW
+        OUR PRODUCTS</button> <!--This button takes us to see the products-->
+
+    <br><br><br>
+        <div  style="color: white;" class="salesBoard"><!--advertisement board-->
+        
+        <h2 style="color:white;">RECOMMENDED FOR YOU</h2>
+        <p>Here are some of your most searched items, browse these items in our products page:</p>
+        <div id="RecomendationDiv"></div>
+
+        <script  type='module'>
+            "use strict";
+
+            //Import recommender class
+            import {Recommender} from '../js/recommendor.js';
+
+            //Create recommender object - it loads its state from local storage
+            let recommender = new Recommender();
+            
+            /* Set up button to call search function. We have to do it here 
+                because search() is not visible outside the module. */
+            document.getElementById("SearchButton").onclick = search;
+            
+            //Display recommendation
+            window.onload = showRecommendation;
+            
+            //Searches for products in database
+            function search(){
+                //Extract the search text
+                let searchText = document.getElementById("SearchBar").value;
+                
+                //Add the search keyword to the recommender
+                recommender.addKeyword(searchText);
+                showRecommendation();
+                
+                
+                //#FIXME# PERFORM SEARCH FOR PRODUCTS
+            }
+            
+            //Display the recommendation in the document
+            function showRecommendation(){
+               
+
+                document.getElementById("RecomendationDiv").innerHTML = recommender.getTopKeyword('TShirts');
+                
+                
+            }
+        </script>
+       
+
+
+
+        <br><br>
+        
+        <a  onclick="searchBarCategories('TShirts');"><img style="width:15%; height:50%; margin-left:-2%;" src="../imgs/T shirt products/hand gripped.jpg"></a>
+    
+        <a onclick="searchBarCategories('Collared');"><img style="width:15%; height:50%; margin-left:2%; padding-left: 10px;" src="../imgs/Collared Shirt products/linen.jpg"></a>
+    
+        
+         <a onclick="searchBarCategories('Full-Sleeve');"><img style="width:15%; height:50%; margin-left:2%;" src="../imgs/full sleeve products/pullover.jpg"></a>
+         <a onclick="searchBarCategories('Sleeveless');"><img style="width:15%; height:50%; margin-left:2%;" src="../imgs/sleeveless products/comfort violet.jpg"></a>
+        <a onclick="searchBarCategories('Polo');"><img style="width:15%; height:50%; margin-left: 2%;" src="../imgs/polo products/graphic ink.jpg"></a> 
+        <br><br>
+        <a  onclick="searchBarCategories('TShirts');"><p style="margin-left:-73%; margin-top:-10%; font-size:x-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;">TShirts</p>
+        <a  onclick="searchBarCategories('Collared');"><p style="margin-left:-36%; margin-top:-4%; font-size:x-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;">Collared</p>
+        <a  onclick="searchBarCategories('Full-Sleeve');"><p style="margin-top:-3%; font-size:x-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;">Full-Sleeve</p>
+        <a  onclick="searchBarCategories('Sleeveless');"><p style=" margin-left:33%; font-size:x-large;  margin-top:-3%; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;">Sleeveless</p>
+        <a  onclick="searchBarCategories('Polo');"><p style="margin-top:-3%;  margin-left:68%; font-size:x-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;">Polo</p>
+
+
+
+
+        
+        
+
+    </div>
+    
+        <h3 style="color:white; font-size: xx-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;">We sell the world's most unique unisex shirts of various types from our own brand. </h3>
+           <h3 style="color: white; font-size: xx-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;"> We sell in town and ship our products internationally.  </h3>
+           <br><br>
+       <h4 style="color:white; font-size: x-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;"> Our branches are located in: </h4>
+       <h4 style="color:white; font-size: x-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;"> Dubai : +971506723471 / 045678234</h4>
+       <h4 style="color:white; font-size: x-large; -webkit-text-stroke: black; -webkit-text-stroke-width: 1px;">UK : +44 7911341256</h4>
+
+    <div><!--footer for the homePage-->
+        <p class="footer" style="color: white;">Web Page made by Krish Kalvani & Ali Usman (1920x1080)</p>
+
+    </div>
+    <!-- <script src="../js/searchFuntion.js"></script> -->
+    <script>
+        function searchBarCategories(category){
+            let form= document.getElementById("searchBarContainer")
+            form.elements["SearchBar"].value=category;
+            form.submit();
+        }
+    </script>
+
+</body><!--end body-->
+
+</html><!--end of code-->

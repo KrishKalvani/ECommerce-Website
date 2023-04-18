@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/cmsStyle.css" type="text/css" rel="stylesheet">
+        <title>CMS - ADD PRODUCTS</title>
+    </head>
+    <body>
+        <div id="CMSnav">
+            
+            <a style="color:white; float:left; margin-top :1.5%; margin-left: 2%; text-decoration: none; font-size: large; font-family: Arial, Helvetica, sans-serif; cursor: pointer;" onclick="searchBarCategories('TShirts')">CMS</a>
+            <a style="color:white; float:left; margin-top :1.5%; margin-left: 2%; text-decoration: none; font-size: large; font-family: Arial, Helvetica, sans-serif;" href="addProductsCMS.html">Add Product</a>
+            <a style="color:white; float:left; margin-top :1.5%; margin-left: 2%; text-decoration: none; font-size: large; font-family: Arial, Helvetica, sans-serif;" href="orderPage.html">Customer Orders</a> 
+            <a style="color:white; float:left; margin-top: 1.5%; margin-left: 1%; text-decoration: none; font-size: large; font-family: Arial, Helvetica, sans-serif; float:right; margin-right:2%;" href="../php/cmsLogin.php">Logout</a>
+            <h2 style="color:white; font-family:Arial, Helvetica, sans-serif; ">JustShirts Content Management System (CMS)</h2>
+        </div>
+        <br>
+        <form id="searchBarContainer" action="../php/searchProductsCMS.php" method="get"><input type="text" name="name" id="SearchBar" type="text" placeholder="search availabe products" required> <input type="submit" value="search">
+        </form>
+        <div  class="dropdown"><!--menu-->
+            <button style="margin-top:2%; margin-left:5%;" class="dropbtn">CATEGORIES</button>
+            <br><br>
+            <div style="margin-left: 5%;" class="dropdown-content"><!--menu content-->
+                <a style="cursor:pointer;" onclick="searchBarCategories('TShirts')">T-Shirts</a><br>
+                <a style="cursor:pointer;" onclick="searchBarCategories('Collared')">Collared</a><br>
+                <span style="cursor:pointer;"  onclick="searchBarCategories('Full-Sleeve')">Full-Sleeve</span><br>
+                <span style="cursor:pointer;" onclick="searchBarCategories('Sleeveless')">Sleeveless</span><br>
+                <span style="cursor:pointer;" onclick="searchBarCategories('Polo')">Polo</span><br>
+            </div>
+        </div>
+        <div>
+            <br><br><br>
+        <h2 style="margin-left:40%;">Create a new product here to sell!</h2>
+        <form action="../php/uploadImage.php" method="post" enctype="multipart/form-data">
+            <table style="margin-left:40%; margin-top:5%;">
+                <tr>
+                    <td> Select image to upload:</td>
+                    <td><input type="file" name="imageToUpload"></td>
+                </tr>
+                <tr>
+                     <td>Category:</td>
+                    <!-- <td><input type="text" name="myCategory"></td> -->
+                    <td>
+                        <select name="myCategory">
+                        <option  value="TShirts" >TShirts</option> 
+                        <option  value="Collared" >Collared</option> 
+                        <option value="Full-Sleeve">Full-Sleeve</option>  
+                        <option  value="Sleeveless">Sleeveless</option>  
+                       <option  value="Polo">Polo</option>
+       
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="myProduct"></td>
+                </tr>
+                <tr>
+                    <td>Cost:</td>
+                    <td><input name="myCost" type="number"></td>
+                </tr>
+                <tr>
+                    <td>Size:</td>
+                    <td><input name="mySize" type="text"></td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td><input name="myDescription" type="text"></td>
+                </tr>
+            
+            </table>
+            <input style="margin-left:55%; margin-top:3%;" type="submit" value="Submit" name="submit" onclick="ValidateAddProductsTest()">
+        </form>
+
+        <p>
+            Server response: <span id="ServerResponse"></span>
+        </p>
+        <script>
+            function ValidateAddProductsTest(){
+                //Create request object 
+                let request = new XMLHttpRequest();
+    
+                //Create event handler that specifies what should happen when server responds
+                request.onload = () => {
+                    //Check HTTP status code
+                    if(request.status === 200){
+                        //Get data from server
+                        let responseData = request.responseText;
+    
+                        //Add data to page
+                        document.getElementById("ServerResponse").innerHTML = responseData;
+                    }
+                    else
+                        alert("Error communicating with server: " + request.status);
+                };
+    
+                //Set up request with HTTP method and URL 
+                // request.open("POST", "../php/uploadImage.php");
+                // request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                
+                //Extract product data
+                let image = document.getElementById("imageToUpload").value;
+                let category= document.getElementById("myCategory").value;
+                let product = document.getElementById("myProduct").value;
+                let cost = document.getElementById("myCost").value;
+                let sizes = document.getElementById("mySize").value;
+                let description = document.getElementById("myDescription").value;
+                console.log(image)
+                console.log(category)
+                console.log(product)
+                console.log(cost)
+                console.log(sizes)
+                console.log(description)
+    
+                
+                
+                
+                
+            }
+        </script>
+        <script>
+            function searchBarCategories(category){
+                let form= document.getElementById("searchBarContainer")
+                form.elements["SearchBar"].value=category;
+                form.submit();
+            }
+        </script>
+         <div id="CMSfooterDiv">
+            <br>
+            <p id="CMSfooterText">Web Page made by Krish Kalvani & Ali Usman (1920x1080)</p>
+    
+        </div>
+        
+    </body>
+</html>
+
